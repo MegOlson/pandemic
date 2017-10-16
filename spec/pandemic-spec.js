@@ -1,14 +1,16 @@
 import { Pandemic } from "./../js/pandemic.js";
 
 describe("Pandemic", function () {
-  let pandemic = new Pandemic;
+  let pandemic;
 
   beforeEach(function(){
+    pandemic = new Pandemic();
     jasmine.clock().install();
   });
 
   afterEach(function(){
     jasmine.clock().uninstall();
+
   });
 
   it("creates an instance of Pandemic class", function() {
@@ -31,4 +33,12 @@ describe("Pandemic", function () {
     pandemic.cureCity("Cairo");
     expect(pandemic.cities[1][1]).toEqual(0);
   });
+
+  it("will increase a random city's infection rate by 1 every 30 seconds", function() {
+    pandemic.infectCity();
+    jasmine.clock().tick(30001);
+    console.log(pandemic.cities);
+    expect(pandemic.infectedCities).toEqual(1);
+  });
+
 });
