@@ -9,3 +9,6 @@
 * Program allows user to cure infection on given city.
   * User Input: click "Cure"
   * User Output: [Paris, 0]
+* If city reaches 5 or more, there is an outbreak.
+  * Example input: Paris Infection rate: 5, Madrid Infection rate: 0, Essen Infection rate: 0
+  * Example output: Paris Outbreak!  Madrid Infection rate: 1, Essen Infection rate: 1

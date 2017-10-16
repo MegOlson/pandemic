@@ -13,7 +13,7 @@ var Pandemic = exports.Pandemic = function () {
   function Pandemic() {
     _classCallCheck(this, Pandemic);
 
-    this.cities = [["San Francisco", 0], ["Chicago", 0], ["Atlanta", 0], ["Washington", 0], ["New York", 0], ["London", 0], ["Madrid", 0], ["Paris", 0], ["Essen", 0], ["Milan", 0], ["St Petersburg", 0], ["Montreal", 0], ["Los Angeles", 0], ["Mexico City", 0], ["Miami", 0], ["Bogota", 0], ["Lima", 0], ["Santiago", 0], ["Buenos Aires", 0], ["Sao Paulo", 0], ["Lagos", 0], ["Kinshasa", 0], ["Johannesburg", 0], ["Khartoum", 0], ["Algiers", 0], ["Istanbul", 0], ["Cairo", 0], ["Riyadh", 0], ["Baghdad", 0], ["Moscow", 0], ["Tehran", 0], ["Karachi", 0], ["Delhi", 0], ["Kolkata", 0], ["Chennai", 0], ["Mumbai", 0], ["Beijing", 0], ["Seoul", 0], ["Tokyo", 0], ["Shanghai", 0], ["Hong Kong", 0], ["Osaka", 0], ["Taipei", 0], ["Bangkok", 0], ["Ho Chi Minh", 0], ["Jakarta", 0], ["Manila", 0], ["Tokyo", 0], ["Sydney", 0]];
+    this.cities = [["San Francisco", 0], ["Chicago", 0], ["Atlanta", 0], ["Washington", 0], ["New York", 0], ["London", 0], ["Madrid", 0], ["Paris", 0], ["Essen", 0], ["Milan", 0], ["St Petersburg", 0], ["Montreal", 0], ["Los Angeles", 0], ["Mexico City", 0], ["Miami", 0], ["Bogota", 0], ["Lima", 0], ["Santiago", 0], ["Buenos Aires", 0], ["Sao Paulo", 0], ["Lagos", 0], ["Kinshasa", 0], ["Johannesburg", 0], ["Khartoum", 0], ["Algiers", 0], ["Istanbul", 0], ["Cairo", 0], ["Riyadh", 0], ["Baghdad", 0], ["Moscow", 0], ["Tehran", 0], ["Karachi", 0], ["Delhi", 0], ["Kolkata", 0], ["Chennai", 0], ["Mumbai", 0], ["Beijing", 0], ["Seoul", 0], ["Tokyo", 0], ["Shanghai", 0], ["Hong Kong", 0], ["Osaka", 0], ["Taipei", 0], ["Bangkok", 0], ["Ho Chi Minh", 0], ["Jakarta", 0], ["Manila", 0], ["Sydney", 0]];
     this.infectedCities = 0;
   }
 
@@ -60,6 +60,14 @@ var Pandemic = exports.Pandemic = function () {
       this.cities[cureCity][1] = 0;
       this.infectedCities -= 1;
     }
+  }, {
+    key: "outbreak",
+    value: function outbreak(city) {
+      var outbreakCity = this.findIndex(city);
+      this.cities[outbreakCity][1] = 5;
+      this.cities[outbreakCity - 1][1] += 1;
+      this.cities[outbreakCity + 1][1] += 1;
+    }
   }]);
 
   return Pandemic;
@@ -80,18 +88,24 @@ $(document).ready(function () {
     var pandemic = new _pandemic.Pandemic();
     pandemic.start();
 
-    for (var i = 0; i < 49; i++) {
+    for (var i = 0; i < 48; i++) {
       var city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
       $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
     }
 
     var refreshInfectionRate = setInterval(function () {
       pandemic.infectCity();
-      for (var _i = 0; _i < 49; _i++) {
+      for (var _i = 0; _i < 48; _i++) {
         var _city = pandemic.cities[_i][0].replace(/[^A-Z0-9]/ig, "-");
-        $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
+        if (pandemic.cities[_i][1] > 5) {
+          pandemic.outbreak(pandemic.cities[_i][0]);
+          $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
+        } else {
+
+          $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
+        }
       }
-    }, 3000);
+    }, 10);
 
     var _loop = function _loop(_i2) {
       $("#" + (_i2 + 1).toString()).click(function () {
@@ -101,7 +115,7 @@ $(document).ready(function () {
       });
     };
 
-    for (var _i2 = 0; _i2 < 49; _i2++) {
+    for (var _i2 = 0; _i2 < 48; _i2++) {
       _loop(_i2);
     }
   });
