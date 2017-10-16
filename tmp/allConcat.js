@@ -23,29 +23,12 @@ $(document).ready(function(){
       }
     }, 3000);
 
-    $("#1").click(function(){
-      pandemic.cureCity("Atlanta");
-      $("#atlanta").text("Infection rate: " + pandemic.cities[0][1]);
-    });
-    $("#2").click(function(){
-      pandemic.cureCity("Cairo");
-      $("#cairo").text("Infection rate: " + pandemic.cities[1][1]);
-    });
-    $("#3").click(function(){
-      pandemic.cureCity("Berlin");
-      $("#berlin").text("Infection rate: " + pandemic.cities[2][1]);
-    });
-    $("#4").click(function(){
-      pandemic.cureCity("Beijing");
-      $("#beijing").text("Infection rate: " + pandemic.cities[3][1]);
-    });
-    $("#5").click(function(){
-      pandemic.cureCity("Santiago");
-      $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
-    });
-    $("#6").click(function(){
-      pandemic.cureCity("Lagos");
-      $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
-    });
+    for(let i = 0; i < 49; i++) {
+      $("#" + (i+1).toString()).click(function(){
+        pandemic.cureCity(pandemic.cities[i][0]);
+        let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
+        $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
+      });
+    }
   });
 });
