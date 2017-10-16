@@ -35,7 +35,7 @@ export class Pandemic {
       let index = this.getRandomInt(0, 6);
       this.cities[index][1] += 1;
       this.infectedCities += 1;
-    }, 30000);
+    }, 3000);
   }
 
   cureCity(city) {

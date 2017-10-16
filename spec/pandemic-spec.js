@@ -19,7 +19,6 @@ describe("Pandemic", function () {
 
   it("adds 3 to infection level of 3 cities on first turn", function() {
     pandemic.start();
-    console.log(pandemic.cities);
     expect(pandemic.infectedCities).toEqual(3);
   });
 
@@ -36,8 +35,7 @@ describe("Pandemic", function () {
 
   it("will increase a random city's infection rate by 1 every 30 seconds", function() {
     pandemic.infectCity();
-    jasmine.clock().tick(30001);
-    console.log(pandemic.cities);
+    jasmine.clock().tick(3001);
     expect(pandemic.infectedCities).toEqual(1);
   });
 
