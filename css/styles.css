@@ -4,4 +4,19 @@
 
 .stats {
   display: none;
+  margin: 20px;
+  text-align: center;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.black {
+  background-color: black;
+  color: white;
+}
+
+.black:hover {
+  color: white;
 }
