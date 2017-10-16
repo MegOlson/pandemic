@@ -10,22 +10,18 @@ $(document).ready(function(){
     let pandemic = new Pandemic;
     pandemic.start();
 
-    $("#atlanta").text("Infection rate: " + pandemic.cities[0][1]);
-    $("#cairo").text("Infection rate: " + pandemic.cities[1][1]);
-    $("#berlin").text("Infection rate: " + pandemic.cities[2][1]);
-    $("#beijing").text("Infection rate: " + pandemic.cities[3][1]);
-    $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
-    $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
+    for(let i = 0; i < 49; i++) {
+      let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
+      $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
+    }
 
     let refreshInfectionRate = setInterval(function(){
       pandemic.infectCity();
-      $("#atlanta").text("Infection rate: " + pandemic.cities[0][1]);
-      $("#cairo").text("Infection rate: " + pandemic.cities[1][1]);
-      $("#berlin").text("Infection rate: " + pandemic.cities[2][1]);
-      $("#beijing").text("Infection rate: " + pandemic.cities[3][1]);
-      $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
-      $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
-    }, 10000);
+      for(let i = 0; i < 49; i++) {
+        let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
+        $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
+      }
+    }, 3000);
 
     $("#1").click(function(){
       pandemic.cureCity("Atlanta");
