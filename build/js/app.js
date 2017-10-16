@@ -5,15 +5,89 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Pandemic = exports.Pandemic = function Pandemic() {
-  _classCallCheck(this, Pandemic);
-};
+var Pandemic = exports.Pandemic = function () {
+  function Pandemic() {
+    _classCallCheck(this, Pandemic);
+
+    this.cities = [["Atlanta", 0], ["Cairo", 0], ["Berlin", 0], ["Beijing", 0], ["Santiago", 0], ["Lagos", 0]];
+    this.infectedCities = 0;
+  }
+
+  _createClass(Pandemic, [{
+    key: "start",
+    value: function start() {
+      for (var i = 0; i < 3; i++) {
+        var index = this.getRandomInt(0, 6);
+        if (this.cities[index][1] == 0) {
+          this.cities[index][1] += 3;
+        } else {
+          i--;
+        }
+      }
+      this.infectedCities += 3;
+    }
+  }, {
+    key: "getRandomInt",
+    value: function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+  }, {
+    key: "findIndex",
+    value: function findIndex(city) {
+      for (var i = 0; i < this.cities.length; i++) {
+        if (this.cities[i][0] === city) {
+          return i;
+        }
+      }
+    }
+  }, {
+    key: "infectCity",
+    value: function infectCity() {
+      var _this = this;
+
+      setInterval(function () {
+        var index = _this.getRandomInt(0, 6);
+        _this.cities[index][1] += 1;
+        _this.infectedCities += 1;
+      }, 30000);
+    }
+  }, {
+    key: "cureCity",
+    value: function cureCity(city) {
+      var cureCity = this.findIndex(city);
+      this.cities[cureCity][1] = 0;
+      this.infectedCities -= 1;
+    }
+  }]);
+
+  return Pandemic;
+}();
 
 },{}],2:[function(require,module,exports){
 "use strict";
 
 var _pandemic = require("./../js/pandemic.js");
+
+$(document).ready(function () {
+  $("#start-game").click(function (e) {
+    e.preventDefault();
+    $("#start-game").addClass("hide");
+    $(".stats").show();
+    var pandemic = new _pandemic.Pandemic();
+    pandemic.start();
+    $("#atlanta").append(pandemic.cities[0][1]);
+    $("#cairo").append(pandemic.cities[1][1]);
+    $("#berlin").append(pandemic.cities[2][1]);
+    $("#beijing").append(pandemic.cities[3][1]);
+    $("#santiago").append(pandemic.cities[4][1]);
+    $("#lagos").append(pandemic.cities[5][1]);
+  });
+});
 
 },{"./../js/pandemic.js":1}]},{},[2]);

@@ -1,6 +1,6 @@
 export class Pandemic {
   constructor(){
-    this.cities = [["Atlanta", 0], ["Cairo", 0], ["Berlin", 0], ["Beijing", 0], ["Santigago", 0], ["Lagos", 0]];
+    this.cities = [["Atlanta", 0], ["Cairo", 0], ["Berlin", 0], ["Beijing", 0], ["Santiago", 0], ["Lagos", 0]];
     this.infectedCities = 0;
   }
 
