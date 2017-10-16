@@ -6,7 +6,7 @@ $(document).ready(function(){
 
     $("#start-game").addClass("hide");
     $(".stats").show();
-    
+
     let pandemic = new Pandemic;
     pandemic.start();
 
@@ -17,7 +17,15 @@ $(document).ready(function(){
     $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
     $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
 
-    pandemic.infectCity();
+    let refreshInfectionRate = setInterval(function(){
+      pandemic.infectCity();
+      $("#atlanta").text("Infection rate: " + pandemic.cities[0][1]);
+      $("#cairo").text("Infection rate: " + pandemic.cities[1][1]);
+      $("#berlin").text("Infection rate: " + pandemic.cities[2][1]);
+      $("#beijing").text("Infection rate: " + pandemic.cities[3][1]);
+      $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
+      $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
+    }, 10000);
 
     $("#1").click(function(){
       pandemic.cureCity("Atlanta");

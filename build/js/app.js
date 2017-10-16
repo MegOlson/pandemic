@@ -46,16 +46,21 @@ var Pandemic = exports.Pandemic = function () {
         }
       }
     }
+
+    // infectCity() {
+    //   setInterval(() => {
+    //     let index = this.getRandomInt(0, 6);
+    //     this.cities[index][1] += 1;
+    //     this.infectedCities += 1;
+    //   }, 3000);
+    // }
+
   }, {
     key: "infectCity",
     value: function infectCity() {
-      var _this = this;
-
-      setInterval(function () {
-        var index = _this.getRandomInt(0, 6);
-        _this.cities[index][1] += 1;
-        _this.infectedCities += 1;
-      }, 3000);
+      var index = this.getRandomInt(0, 6);
+      this.cities[index][1] += 1;
+      this.infectedCities += 1;
     }
   }, {
     key: "cureCity",
@@ -91,7 +96,15 @@ $(document).ready(function () {
     $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
     $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
 
-    pandemic.infectCity();
+    var refreshInfectionRate = setInterval(function () {
+      pandemic.infectCity();
+      $("#atlanta").text("Infection rate: " + pandemic.cities[0][1]);
+      $("#cairo").text("Infection rate: " + pandemic.cities[1][1]);
+      $("#berlin").text("Infection rate: " + pandemic.cities[2][1]);
+      $("#beijing").text("Infection rate: " + pandemic.cities[3][1]);
+      $("#santiago").text("Infection rate: " + pandemic.cities[4][1]);
+      $("#lagos").text("Infection rate: " + pandemic.cities[5][1]);
+    }, 10000);
 
     $("#1").click(function () {
       pandemic.cureCity("Atlanta");

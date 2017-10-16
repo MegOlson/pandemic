@@ -30,12 +30,18 @@ export class Pandemic {
     }
   }
 
+  // infectCity() {
+  //   setInterval(() => {
+  //     let index = this.getRandomInt(0, 6);
+  //     this.cities[index][1] += 1;
+  //     this.infectedCities += 1;
+  //   }, 3000);
+  // }
+
   infectCity() {
-    setInterval(() => {
-      let index = this.getRandomInt(0, 6);
-      this.cities[index][1] += 1;
-      this.infectedCities += 1;
-    }, 3000);
+    let index = this.getRandomInt(0, 6);
+    this.cities[index][1] += 1;
+    this.infectedCities += 1;
   }
 
   cureCity(city) {
