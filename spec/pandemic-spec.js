@@ -8,6 +8,10 @@ describe("Pandemic", function () {
   });
 
   it("creates an instance of Pandemic class", function() {
-    expect(pandemic.start).toEqual(true);
+    expect(pandemic.cities.includes("Atlanta")).toEqual(true);
   });
+
+  // it("adds 3 to infection level of 3 cities on first turn", function() {
+  //   expect(pandemic.start).toEqual(true);
+  // });
 });
