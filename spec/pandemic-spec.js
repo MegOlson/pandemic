@@ -25,4 +25,10 @@ describe("Pandemic", function () {
     let index = pandemic.findIndex("Cairo");
     expect(index).toEqual(1);
   });
+
+  it("will cure a city completely and reset its infected rate to 0", function() {
+    pandemic.infectCity("Cairo");
+    pandemic.cureCity("Cairo");
+    expect(pandemic.cities[1][1]).toEqual(0);
+  });
 });

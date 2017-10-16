@@ -30,10 +30,16 @@ export class Pandemic {
     }
   }
 
-  // cure(city) {
-  //
-  // }
+  infectCity(city) {
+    let infectCity = this.findIndex(city);
+    this.cities[infectCity][1] += 1;
+    this.infectedCities += 1;
+  }
 
-
+  cureCity(city) {
+    let cureCity = this.findIndex(city);
+    this.cities[cureCity][1] = 0;
+    this.infectedCities -= 1;
+  }
 
 }
