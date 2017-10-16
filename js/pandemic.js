@@ -22,6 +22,18 @@ export class Pandemic {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  findIndex(city) {
+    for(let i = 0; i < this.cities.length; i++) {
+      if(this.cities[i][0] === city) {
+        return i;
+      }
+    }
+  }
+
+  // cure(city) {
+  //
+  // }
+
 
 
 }
