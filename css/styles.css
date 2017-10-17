@@ -34,8 +34,12 @@
 
 .winner {
   display: none;
+  text-align: center;
+  font-size: 20px;
 }
 
 .loser {
   display: none;
+  text-align: center;
+  font-size: 20px;
 }

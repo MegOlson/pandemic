@@ -32,13 +32,13 @@ $(document).ready(function(){
         $(".stats").addClass("hide");
         $(".winner").show();
         $.ajax({
-          url: `http://api.giphy.com/v1/gifs/random?q=winning&api_key=${apiKey}`,
+          url: `http://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=winner`,
           type: 'GET',
           data: {
             format: 'json'
           },
           success: function(response) {
-            $('.winner').html(`Congratulations! You have cured the world! <img src="${response.data.image_original_url}"><button type="button" name="button" class="btn replay">Play Again</button>`);
+            $('.winner2').html(`Congratulations! You have cured the world! <br><button type="button" name="button" class="btn replay">Play Again</button> <br><img src="${response.data.image_original_url}">`);
           },
           error: function() {
             $('#errors').text("There was an error processing your request. Please try again.")
@@ -49,13 +49,13 @@ $(document).ready(function(){
         $(".stats").addClass("hide");
         $(".loser").show();
         $.ajax({
-          url: `http://api.giphy.com/v1/gifs/random?q=fail&api_key=${apiKey}`,
+          url: `http://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=fail`,
           type: 'GET',
           data: {
             format: 'json'
           },
           success: function(response) {
-            $('.loser').html(`You failed. The world is dead. <img src="${response.data.image_original_url}"><button type="button" name="button" class="btn replay">Play Again</button>`);
+            $('.loser2').html(`You failed. The world is dead.<img src="${response.data.image_original_url}">`);
           },
           error: function() {
             $('#errors').text("There was an error processing your request. Please try again.")
@@ -72,12 +72,8 @@ $(document).ready(function(){
         $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
       });
     }
-
     $(".replay").click(function(){
       location.reload();
     });
-
-
-
   });
 });
