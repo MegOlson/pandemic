@@ -14,9 +14,15 @@
       </div>
       <form id="go">
         <h4>Select the difficulty:</h4>
-        <label class="radio-inline"><input type="radio" name="difficulty" value="1000">Easy</label>
-        <label class="radio-inline"><input type="radio" name="difficulty" value= "500">Medium</label>
-        <label class="radio-inline"><input type="radio" name="difficulty" value= "100">Hard</label>
+        <label class="radio-inline">Easy</label>
+        <input type="radio" name="difficulty" value="1000" required>
+
+        <label class="radio-inline">Medium</label>
+        <input type="radio" name="difficulty" value= "500" required>
+
+        <label class="radio-inline">Hard</label>
+        <input type="radio" name="difficulty" value= "100" required>
+
         <button type="submit" id="start-game" class="btn" name="button">Start Game</button>
       </form>
       <div class="stats">
@@ -269,7 +275,6 @@
           </div>
         </div>
       </div>
-
       <div class="winner">
         <h2>Congratulations! You have cured the world!</h2>
         <button type="button" name="button" class="btn replay">Play Again</button>
