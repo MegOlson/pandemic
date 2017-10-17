@@ -163,7 +163,7 @@ $(document).ready(function () {
             format: 'json'
           },
           success: function success(response) {
-            $('.winner2').html("Congratulations! You have cured the world! <br><button type=\"button\" name=\"button\" class=\"btn replay\">Play Again</button> <br><img src=\"" + response.data.image_original_url + "\">");
+            $('.winner2').html("<img src=\"" + response.data.image_original_url + "\">");
           },
           error: function error() {
             $('#errors').text("There was an error processing your request. Please try again.");
@@ -180,7 +180,7 @@ $(document).ready(function () {
             format: 'json'
           },
           success: function success(response) {
-            $('.loser2').html("You failed. The world is dead.<img src=\"" + response.data.image_original_url + "\">");
+            $('.loser2').html("<img src=\"" + response.data.image_original_url + "\">");
           },
           error: function error() {
             $('#errors').text("There was an error processing your request. Please try again.");
