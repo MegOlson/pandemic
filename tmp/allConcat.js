@@ -1,4 +1,5 @@
 import { Pandemic } from "./../js/pandemic.js";
+var apiKey = require("./../.env").apiKey;
 
 $(document).ready(function(){
   $("#go").submit(function(e){
@@ -16,7 +17,7 @@ $(document).ready(function(){
       $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
     }
 
-    setInterval(function(){
+    let anything = setInterval(function(){
       pandemic.infectCity();
       for(let i = 0; i < 48; i++) {
         let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
@@ -30,9 +31,37 @@ $(document).ready(function(){
       if (pandemic.result === "winner") {
         $(".stats").addClass("hide");
         $(".winner").show();
+        $.ajax({
+          url: `http://api.giphy.com/v1/gifs/random?q=winning&api_key=${apiKey}`,
+          type: 'GET',
+          data: {
+            format: 'json'
+          },
+          success: function(response) {
+            $('.winner').html(`Congratulations! You have cured the world! <img src="${response.data.image_original_url}"><button type="button" name="button" class="btn replay">Play Again</button>`);
+          },
+          error: function() {
+            $('#errors').text("There was an error processing your request. Please try again.")
+          }
+        });
+        clearInterval(anything);
       } else if (pandemic.result === "loser") {
         $(".stats").addClass("hide");
         $(".loser").show();
+        $.ajax({
+          url: `http://api.giphy.com/v1/gifs/random?q=fail&api_key=${apiKey}`,
+          type: 'GET',
+          data: {
+            format: 'json'
+          },
+          success: function(response) {
+            $('.loser').html(`You failed. The world is dead. <img src="${response.data.image_original_url}"><button type="button" name="button" class="btn replay">Play Again</button>`);
+          },
+          error: function() {
+            $('#errors').text("There was an error processing your request. Please try again.")
+          }
+        });
+        clearInterval(anything);
       }
     }, difficulty);
 
@@ -47,5 +76,8 @@ $(document).ready(function(){
     $(".replay").click(function(){
       location.reload();
     });
+
+
+
   });
 });

@@ -1,4 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+exports.apiKey = "iJojPJrQyTgHL32k1Pz7UmPZjOyORYon";
+
+},{}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -116,10 +119,12 @@ var Pandemic = exports.Pandemic = function () {
   return Pandemic;
 }();
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 var _pandemic = require("./../js/pandemic.js");
+
+var apiKey = require("./../.env").apiKey;
 
 $(document).ready(function () {
   $("#go").submit(function (e) {
@@ -137,7 +142,7 @@ $(document).ready(function () {
       $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
     }
 
-    setInterval(function () {
+    var anything = setInterval(function () {
       pandemic.infectCity();
       for (var _i = 0; _i < 48; _i++) {
         var _city = pandemic.cities[_i][0].replace(/[^A-Z0-9]/ig, "-");
@@ -151,9 +156,37 @@ $(document).ready(function () {
       if (pandemic.result === "winner") {
         $(".stats").addClass("hide");
         $(".winner").show();
+        $.ajax({
+          url: "http://api.giphy.com/v1/gifs/random?q=winning&api_key=" + apiKey,
+          type: 'GET',
+          data: {
+            format: 'json'
+          },
+          success: function success(response) {
+            $('.winner').html("Congratulations! You have cured the world! <img src=\"" + response.data.image_original_url + "\"><button type=\"button\" name=\"button\" class=\"btn replay\">Play Again</button>");
+          },
+          error: function error() {
+            $('#errors').text("There was an error processing your request. Please try again.");
+          }
+        });
+        clearInterval(anything);
       } else if (pandemic.result === "loser") {
         $(".stats").addClass("hide");
         $(".loser").show();
+        $.ajax({
+          url: "http://api.giphy.com/v1/gifs/random?q=fail&api_key=" + apiKey,
+          type: 'GET',
+          data: {
+            format: 'json'
+          },
+          success: function success(response) {
+            $('.loser').html("You failed. The world is dead. <img src=\"" + response.data.image_original_url + "\"><button type=\"button\" name=\"button\" class=\"btn replay\">Play Again</button>");
+          },
+          error: function error() {
+            $('#errors').text("There was an error processing your request. Please try again.");
+          }
+        });
+        clearInterval(anything);
       }
     }, difficulty);
 
@@ -175,4 +208,4 @@ $(document).ready(function () {
   });
 });
 
-},{"./../js/pandemic.js":1}]},{},[2]);
+},{"./../.env":1,"./../js/pandemic.js":2}]},{},[3]);
