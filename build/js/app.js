@@ -15,6 +15,7 @@ var Pandemic = exports.Pandemic = function () {
 
     this.cities = [["San Francisco", 0], ["Chicago", 0], ["Atlanta", 0], ["Washington", 0], ["New York", 0], ["London", 0], ["Madrid", 0], ["Paris", 0], ["Essen", 0], ["Milan", 0], ["St Petersburg", 0], ["Montreal", 0], ["Los Angeles", 0], ["Mexico City", 0], ["Miami", 0], ["Bogota", 0], ["Lima", 0], ["Santiago", 0], ["Buenos Aires", 0], ["Sao Paulo", 0], ["Lagos", 0], ["Kinshasa", 0], ["Johannesburg", 0], ["Khartoum", 0], ["Algiers", 0], ["Istanbul", 0], ["Cairo", 0], ["Riyadh", 0], ["Baghdad", 0], ["Moscow", 0], ["Tehran", 0], ["Karachi", 0], ["Delhi", 0], ["Kolkata", 0], ["Chennai", 0], ["Mumbai", 0], ["Beijing", 0], ["Seoul", 0], ["Tokyo", 0], ["Shanghai", 0], ["Hong Kong", 0], ["Osaka", 0], ["Taipei", 0], ["Bangkok", 0], ["Ho Chi Minh", 0], ["Jakarta", 0], ["Manila", 0], ["Sydney", 0]];
     this.infectedCities = 0;
+    this.outbreaks = 0;
   }
 
   _createClass(Pandemic, [{
@@ -69,10 +70,9 @@ var Pandemic = exports.Pandemic = function () {
       this.cities[outbreakCity - 1][1] += 1;
       this.cities[outbreakCity + 1][1] += 1;
     }
-
-    // loser() {
-    //
-    // }
+  }, {
+    key: "loser",
+    value: function loser() {}
     //
     // winner() {
     //

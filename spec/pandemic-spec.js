@@ -10,7 +10,6 @@ describe("Pandemic", function () {
 
   afterEach(function(){
     jasmine.clock().uninstall();
-
   });
 
   it("creates an instance of Pandemic class", function() {
@@ -28,15 +27,22 @@ describe("Pandemic", function () {
   });
 
   it("will cure a city completely and reset its infected rate to 0", function() {
-    pandemic.infectCity("Cairo");
-    pandemic.cureCity("Cairo");
-    expect(pandemic.cities[1][1]).toEqual(0);
+    pandemic.infectCity("San Francisco");
+    pandemic.cureCity("San Francisco");
+    expect(pandemic.cities[0][1]).toEqual(0);
   });
 
   it("will increase a random city's infection rate by 1 every 30 seconds", function() {
     pandemic.infectCity();
     jasmine.clock().tick(3001);
     expect(pandemic.infectedCities).toEqual(1);
+  });
+
+  it("will declare user a loser when there are 8 or more outbreaks.", function(){
+    for(let i = 1; i < 10; i++) {
+      pandemic.outbreak(pandemic.cities[i][0]);
+    }
+    expect(pandemic.result).toEqual("loser");
   });
 
 });

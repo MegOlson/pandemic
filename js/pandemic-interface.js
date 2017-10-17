@@ -36,5 +36,8 @@ $(document).ready(function(){
         $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
       });
     }
+
+
+
   });
 });
