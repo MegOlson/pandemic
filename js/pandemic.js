@@ -36,8 +36,8 @@ export class Pandemic {
   }
 
   infectCity() {
-    let index = this.getRandomInt(0, 49);
-    this.cities[index][1] += 1;
+    let index = this.getRandomInt(0, 48);
+    this.cities[index][1] ++;
     this.infectedCities += 1;
   }
 
@@ -49,10 +49,22 @@ export class Pandemic {
 
   outbreak(city) {
     let outbreakCity = this.findIndex(city);
-    this.cities[outbreakCity][1] = 5;
-    this.cities[outbreakCity - 1][1] += 1;
-    this.cities[outbreakCity + 1][1] += 1;
-    this.outbreaks += 1;
+    if (outbreakCity === 0) {
+      this.cities[outbreakCity][1] = 5;
+      this.cities[47][1] += 1;
+      this.cities[1][1] += 1;
+      this.outbreaks += 1;
+    }else if (outbreakCity === 47) {
+      this.cities[outbreakCity][1] = 5;
+      this.cities[0][1] += 1;
+      this.cities[46][1] += 1;
+      this.outbreaks += 1;
+    }else {
+      this.cities[outbreakCity][1] = 5;
+      this.cities[outbreakCity - 1][1] += 1;
+      this.cities[outbreakCity + 1][1] += 1;
+      this.outbreaks += 1;
+      }
     if (this.outbreaks >= 8) {
       this.loser();
     }

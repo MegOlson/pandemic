@@ -21,6 +21,8 @@ var Pandemic = exports.Pandemic = function () {
   _createClass(Pandemic, [{
     key: "start",
     value: function start(difficulty) {
+      var _this = this;
+
       for (var i = 0; i < 8; i++) {
         var index = this.getRandomInt(0, 49);
         if (this.cities[index][1] == 0) {
@@ -31,6 +33,9 @@ var Pandemic = exports.Pandemic = function () {
       }
       this.difficulty = difficulty;
       this.infectedCities += 8;
+      setTimeout(function () {
+        _this.checkOutbreaks();
+      }, 60000);
     }
   }, {
     key: "getRandomInt",
@@ -51,8 +56,8 @@ var Pandemic = exports.Pandemic = function () {
   }, {
     key: "infectCity",
     value: function infectCity() {
-      var index = this.getRandomInt(0, 49);
-      this.cities[index][1] += 1;
+      var index = this.getRandomInt(0, 48);
+      this.cities[index][1]++;
       this.infectedCities += 1;
     }
   }, {
@@ -66,18 +71,46 @@ var Pandemic = exports.Pandemic = function () {
     key: "outbreak",
     value: function outbreak(city) {
       var outbreakCity = this.findIndex(city);
-      this.cities[outbreakCity][1] = 5;
-      this.cities[outbreakCity - 1][1] += 1;
-      this.cities[outbreakCity + 1][1] += 1;
+      if (outbreakCity === 0) {
+        this.cities[outbreakCity][1] = 5;
+        this.cities[47][1] += 1;
+        this.cities[1][1] += 1;
+        this.outbreaks += 1;
+      } else if (outbreakCity === 47) {
+        this.cities[outbreakCity][1] = 5;
+        this.cities[0][1] += 1;
+        this.cities[46][1] += 1;
+        this.outbreaks += 1;
+      } else {
+        this.cities[outbreakCity][1] = 5;
+        this.cities[outbreakCity - 1][1] += 1;
+        this.cities[outbreakCity + 1][1] += 1;
+        this.outbreaks += 1;
+      }
+      if (this.outbreaks >= 8) {
+        this.loser();
+      }
     }
   }, {
     key: "loser",
-    value: function loser() {}
-    //
-    // winner() {
-    //
-    // }
-
+    value: function loser() {
+      for (var i = 0; i < this.cities.length; i++) {
+        this.cities[i][1] = 5;
+      }
+      this.result = "loser";
+    }
+  }, {
+    key: "winner",
+    value: function winner() {
+      this.result = "winner";
+    }
+  }, {
+    key: "checkOutbreaks",
+    value: function checkOutbreaks() {
+      if (this.outbreaks < 8) {
+        this.winner();
+      }
+    }
   }]);
 
   return Pandemic;
@@ -103,15 +136,14 @@ $(document).ready(function () {
       $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
     }
 
-    var refreshInfectionRate = setInterval(function () {
+    setInterval(function () {
       pandemic.infectCity();
       for (var _i = 0; _i < 48; _i++) {
         var _city = pandemic.cities[_i][0].replace(/[^A-Z0-9]/ig, "-");
-        if (pandemic.cities[_i][1] > 5) {
+        if (pandemic.cities[_i][1] >= 5) {
           pandemic.outbreak(pandemic.cities[_i][0]);
           $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
         } else {
-
           $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
         }
       }
@@ -127,6 +159,14 @@ $(document).ready(function () {
 
     for (var _i2 = 0; _i2 < 48; _i2++) {
       _loop(_i2);
+    }
+
+    if (pandemic.result === "winner") {
+      $("#stats").addClass("hide");
+      $(".winner").removeClass("hide");
+    } else if (pandemic.result === "loser") {
+      $("#stats").addClass("hide");
+      $(".loser").removeClass("hide");
     }
   });
 });

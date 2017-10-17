@@ -15,15 +15,14 @@ $(document).ready(function(){
       $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
     }
 
-    let refreshInfectionRate = setInterval(function(){
+    setInterval(function(){
       pandemic.infectCity();
       for(let i = 0; i < 48; i++) {
         let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
-        if(pandemic.cities[i][1] > 5) {
+        if(pandemic.cities[i][1] >= 5) {
           pandemic.outbreak(pandemic.cities[i][0]);
           $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
         } else {
-
           $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
         }
       }
@@ -37,7 +36,12 @@ $(document).ready(function(){
       });
     }
 
-
-
+    if (pandemic.result === "winner") {
+      $("#stats").addClass("hide");
+      $(".winner").removeClass("hide");
+    } else if (pandemic.result === "loser") {
+      $("#stats").addClass("hide");
+      $(".loser").removeClass("hide");
+    }
   });
 });
