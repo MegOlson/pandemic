@@ -24,8 +24,8 @@ var Pandemic = exports.Pandemic = function () {
       var _this = this;
 
       for (var i = 0; i < 8; i++) {
-        var index = this.getRandomInt(0, 49);
-        if (this.cities[index][1] == 0) {
+        var index = this.getRandomInt(0, 48);
+        if (this.cities[index][1] === 0) {
           this.cities[index][1] += 3;
         } else {
           i--;

@@ -7,8 +7,8 @@ export class Pandemic {
 
   start(difficulty){
     for(let i = 0; i < 8; i ++) {
-      let index = this.getRandomInt(0, 49);
-      if(this.cities[index][1] == 0) {
+      let index = this.getRandomInt(0, 48);
+      if(this.cities[index][1] === 0) {
         this.cities[index][1] += 3;
       }else {
         i --;
