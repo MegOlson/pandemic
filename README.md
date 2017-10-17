@@ -15,3 +15,9 @@
 * User can select difficulty that will change the speed of infections.
   * Example input: Easy
   * Example output: 1000
+* If program has 8 or more outbreaks, user is declared a loser.
+  * Example input: 9 outbreaks.
+  * Example output: Loser.
+* If program has 7 or less outbreaks after 1 minute, user is declared a winner.
+  * Example input: 5 outbreaks at 1 minute.
+  * Example Output: Winner!

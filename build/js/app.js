@@ -29,7 +29,7 @@ var Pandemic = exports.Pandemic = function () {
         }
       }
       this.difficulty = difficulty;
-      this.infectedCities += 3;
+      this.infectedCities += 8;
     }
   }, {
     key: "getRandomInt",
@@ -69,6 +69,15 @@ var Pandemic = exports.Pandemic = function () {
       this.cities[outbreakCity - 1][1] += 1;
       this.cities[outbreakCity + 1][1] += 1;
     }
+
+    // loser() {
+    //
+    // }
+    //
+    // winner() {
+    //
+    // }
+
   }]);
 
   return Pandemic;

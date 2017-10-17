@@ -14,7 +14,7 @@ export class Pandemic {
       }
     }
     this.difficulty = difficulty;
-    this.infectedCities += 3;
+    this.infectedCities += 8;
   }
 
   getRandomInt(min, max) {
@@ -50,5 +50,12 @@ export class Pandemic {
     this.cities[outbreakCity + 1][1] += 1;
   }
 
+  // loser() {
+  //
+  // }
+  //
+  // winner() {
+  //
+  // }
 
 }

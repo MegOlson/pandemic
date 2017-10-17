@@ -14,17 +14,17 @@ describe("Pandemic", function () {
   });
 
   it("creates an instance of Pandemic class", function() {
-    expect(pandemic.cities[1].includes("Cairo")).toEqual(true);
+    expect(pandemic.cities[0].includes("San Francisco")).toEqual(true);
   });
 
   it("adds 3 to infection level of 3 cities on first turn", function() {
     pandemic.start();
-    expect(pandemic.infectedCities).toEqual(3);
+    expect(pandemic.infectedCities).toEqual(8);
   });
 
   it("will return index of city when given city name", function() {
-    let index = pandemic.findIndex("Cairo");
-    expect(index).toEqual(1);
+    let index = pandemic.findIndex("San Francisco");
+    expect(index).toEqual(0);
   });
 
   it("will cure a city completely and reset its infected rate to 0", function() {
