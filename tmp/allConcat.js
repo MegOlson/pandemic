@@ -4,6 +4,7 @@ $(document).ready(function(){
   $("#go").submit(function(e){
     e.preventDefault();
     let difficulty = $("input:radio[name=difficulty]:checked").val();
+
     $("#go").addClass("hide");
     $(".stats").show();
 
@@ -26,6 +27,13 @@ $(document).ready(function(){
           $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
         }
       }
+      if (pandemic.result === "winner") {
+        $(".stats").addClass("hide");
+        $(".winner").show();
+      } else if (pandemic.result === "loser") {
+        $(".stats").addClass("hide");
+        $(".loser").show();
+      }
     }, difficulty);
 
     for(let i = 0; i < 48; i++) {
@@ -36,12 +44,8 @@ $(document).ready(function(){
       });
     }
 
-    if (pandemic.result === "winner") {
-      $("#stats").addClass("hide");
-      $(".winner").removeClass("hide");
-    } else if (pandemic.result === "loser") {
-      $("#stats").addClass("hide");
-      $(".loser").removeClass("hide");
-    }
+    $(".replay").click(function(){
+      location.reload();
+    });
   });
 });
