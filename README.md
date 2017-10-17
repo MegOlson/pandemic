@@ -11,4 +11,7 @@
   * User Output: [Paris, 0]
 * If city reaches 5 or more, there is an outbreak.
   * Example input: Paris Infection rate: 5, Madrid Infection rate: 0, Essen Infection rate: 0
-  * Example output: Paris Outbreak!  Madrid Infection rate: 1, Essen Infection rate: 1
+  * Example output: Paris Outbreak!  Madrid Infection rate: 1, Essen Infection rate:1
+* User can select difficulty that will change the speed of infections.
+  * Example input: Easy
+  * Example output: 1000

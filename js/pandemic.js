@@ -4,8 +4,8 @@ export class Pandemic {
     this.infectedCities = 0;
   }
 
-  start(){
-    for(let i = 0; i < 3; i ++) {
+  start(difficulty){
+    for(let i = 0; i < 8; i ++) {
       let index = this.getRandomInt(0, 49);
       if(this.cities[index][1] == 0) {
         this.cities[index][1] += 3;
@@ -13,6 +13,7 @@ export class Pandemic {
         i --;
       }
     }
+    this.difficulty = difficulty;
     this.infectedCities += 3;
   }
 
@@ -48,5 +49,6 @@ export class Pandemic {
     this.cities[outbreakCity - 1][1] += 1;
     this.cities[outbreakCity + 1][1] += 1;
   }
+
 
 }

@@ -1,14 +1,14 @@
 import { Pandemic } from "./../js/pandemic.js";
 
 $(document).ready(function(){
-  $("#start-game").click(function(e){
+  $("#go").submit(function(e){
     e.preventDefault();
-
-    $("#start-game").addClass("hide");
+    let difficulty = $("input:radio[name=difficulty]:checked").val();
+    $("#go").addClass("hide");
     $(".stats").show();
 
     let pandemic = new Pandemic;
-    pandemic.start();
+    pandemic.start(difficulty);
 
     for(let i = 0; i < 48; i++) {
       let city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
@@ -27,7 +27,7 @@ $(document).ready(function(){
           $("#" + city.toLowerCase()).text("Infection rate: " + pandemic.cities[i][1]);
         }
       }
-    }, 10);
+    }, difficulty);
 
     for(let i = 0; i < 48; i++) {
       $("#" + (i+1).toString()).click(function(){

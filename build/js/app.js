@@ -19,8 +19,8 @@ var Pandemic = exports.Pandemic = function () {
 
   _createClass(Pandemic, [{
     key: "start",
-    value: function start() {
-      for (var i = 0; i < 3; i++) {
+    value: function start(difficulty) {
+      for (var i = 0; i < 8; i++) {
         var index = this.getRandomInt(0, 49);
         if (this.cities[index][1] == 0) {
           this.cities[index][1] += 3;
@@ -28,6 +28,7 @@ var Pandemic = exports.Pandemic = function () {
           i--;
         }
       }
+      this.difficulty = difficulty;
       this.infectedCities += 3;
     }
   }, {
@@ -79,14 +80,14 @@ var Pandemic = exports.Pandemic = function () {
 var _pandemic = require("./../js/pandemic.js");
 
 $(document).ready(function () {
-  $("#start-game").click(function (e) {
+  $("#go").submit(function (e) {
     e.preventDefault();
-
-    $("#start-game").addClass("hide");
+    var difficulty = $("input:radio[name=difficulty]:checked").val();
+    $("#go").addClass("hide");
     $(".stats").show();
 
     var pandemic = new _pandemic.Pandemic();
-    pandemic.start();
+    pandemic.start(difficulty);
 
     for (var i = 0; i < 48; i++) {
       var city = pandemic.cities[i][0].replace(/[^A-Z0-9]/ig, "-");
@@ -105,7 +106,7 @@ $(document).ready(function () {
           $("#" + _city.toLowerCase()).text("Infection rate: " + pandemic.cities[_i][1]);
         }
       }
-    }, 10);
+    }, difficulty);
 
     var _loop = function _loop(_i2) {
       $("#" + (_i2 + 1).toString()).click(function () {
