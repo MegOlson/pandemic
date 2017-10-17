@@ -16,6 +16,9 @@ export class Pandemic {
     }
     this.difficulty = difficulty;
     this.infectedCities += 8;
+    setTimeout(() => {
+      this.checkOutbreaks();
+    }, 60000);
   }
 
   getRandomInt(min, max) {
@@ -53,10 +56,6 @@ export class Pandemic {
     if (this.outbreaks >= 8) {
       this.loser();
     }
-    // else if (this.outbreaks < 8 ) {
-    //   this.winner();
-    // }
-
   }
 
   loser() {
@@ -65,9 +64,15 @@ export class Pandemic {
     }
     this.result = "loser";
   }
-  //
-  // winner() {
-  //
-  // }
+
+  winner() {
+    this.result = "winner";
+  }
+
+  checkOutbreaks() {
+    if(this.outbreaks < 8) {
+      this.winner();
+    }
+  }
 
 }

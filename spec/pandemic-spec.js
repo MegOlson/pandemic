@@ -16,7 +16,7 @@ describe("Pandemic", function () {
     expect(pandemic.cities[0].includes("San Francisco")).toEqual(true);
   });
 
-  it("adds 3 to infection level of 3 cities on first turn", function() {
+  it("adds 3 to infection level of 8 cities on first turn", function() {
     pandemic.start();
     expect(pandemic.infectedCities).toEqual(8);
   });
@@ -43,6 +43,12 @@ describe("Pandemic", function () {
       pandemic.outbreak(pandemic.cities[i][0]);
     }
     expect(pandemic.result).toEqual("loser");
+  });
+
+  it("will decalre user a winner when there are less than 8 outbreaks after a minute of playing", function (){
+    pandemic.start();
+    jasmine.clock().tick(60001);
+    expect(pandemic.result).toEqual("winner");
   });
 
 });
